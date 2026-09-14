@@ -1,0 +1,10 @@
+{
+  "name": "Bloc de Notas y Salas Privadas",
+  "description": "Salas de chat privadas y bloc de notas con Firebase Firestore, protegidos mediante verificación de fotos con IA (chaqueta, gafas, taza de café, o reglas personalizadas con Gemini 3.6 Flash).",
+  "requestFramePermissions": [
+    "camera"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

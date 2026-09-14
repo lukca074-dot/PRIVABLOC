@@ -1,0 +1,95 @@
+{
+  "entities": {
+    "Room": {
+      "title": "Room",
+      "description": "A private chat room protected by a custom AI verification photo condition",
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 32,
+          "description": "Unique room entry code"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100,
+          "description": "Room display name"
+        },
+        "condition": {
+          "type": "string",
+          "minLength": 5,
+          "maxLength": 500,
+          "description": "AI photo verification requirement specified by room creator"
+        },
+        "creatorUid": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "description": "Firebase Auth UID of the creator"
+        },
+        "creatorName": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 50,
+          "description": "Display name or alias of the room creator"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Creation timestamp"
+        }
+      },
+      "required": ["code", "name", "condition", "creatorUid", "creatorName"]
+    },
+    "Message": {
+      "title": "Message",
+      "description": "Chat message sent inside a room",
+      "type": "object",
+      "properties": {
+        "roomId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64,
+          "description": "Parent room document ID"
+        },
+        "senderUid": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "description": "Firebase Auth UID of the sender"
+        },
+        "senderName": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 50,
+          "description": "Name or handle of sender"
+        },
+        "text": {
+          "type": "string",
+          "maxLength": 2000,
+          "description": "Message content"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Timestamp when message was sent"
+        }
+      },
+      "required": ["roomId", "senderUid", "senderName", "text"]
+    }
+  },
+  "firestore": {
+    "/rooms/{roomId}": {
+      "schema": {
+        "$ref": "#/entities/Room"
+      },
+      "description": "Collection of private chat rooms"
+    },
+    "/rooms/{roomId}/messages/{messageId}": {
+      "schema": {
+        "$ref": "#/entities/Message"
+      },
+      "description": "Subcollection of real-time messages within a room"
+    }
+  }
+}
